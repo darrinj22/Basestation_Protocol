@@ -13,6 +13,8 @@ extern int wait2send;
 extern int sendData = 1;
 extern int start = 0; 
 extern unsigned int transmit = 0; 
+extern unsigned short int msgReceived ; 
+
 void main(void){
 Init_All(); 
 
@@ -42,7 +44,15 @@ Init_All();
     //toggleLEDs();
      break; 
     case 2: 
-      delay(0,&wait2send,&sendData,4); 
+      delay(0,&wait2send,&sendData,3); 
+      break; 
+    case 3: 
+      if(msgReceived){
+        UCA1TXBUF = 'Y';
+        msgReceived = 0 ; 
+      sendData = 1; 
+      }
+      
       break; 
     default: 
       break; 

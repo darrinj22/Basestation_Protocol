@@ -1,6 +1,10 @@
 #include  "functions.h"
 #include  "msp430.h"
 #include "macros.h"
+#include <stdio.h>
+
+// flags 
+extern unsigned short int msgReceived = 0 ; 
 
 void Init_UCA0(int baudRate_A0){
 UCA0CTLW0 = clear; // Use word register
@@ -86,6 +90,9 @@ switch(__even_in_range(UCA1IV,8)){
 case 0: // Vector 0 - no interrupt
 break;
 case 2: // Vector 2 – RXIFG
+  if(UCA1RXBUF == 't'){
+    msgReceived = 1;  
+  }
 /*temp1 = usb_rx_ring_wr1++;
 USB_Char_Rx1[temp1] = UCA1RXBUF; // RX -> USB_Char_Rx character
 
