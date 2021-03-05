@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>2</fileVersion>
+    <fileChecksum>257985725</fileChecksum>
+    <configuration>
+        <name>Debug</name>
+        <outputs>
+            <file>$TOOLKIT_DIR$\inc\legacy.h</file>
+            <file>$PROJ_DIR$\init.c</file>
+            <file>$PROJ_DIR$\communications.c</file>
+            <file>$PROJ_DIR$\ports.c</file>
+            <file>$PROJ_DIR$\functions.h</file>
+            <file>$PROJ_DIR$\clocks.c</file>
+            <file>$PROJ_DIR$\commands.c</file>
+            <file>$PROJ_DIR$\macros.h</file>
+            <file>$PROJ_DIR$\main.c</file>
+            <file>$PROJ_DIR$\misc.c</file>
+            <file>$PROJ_DIR$\timers.c</file>
+            <file>$PROJ_DIR$\Debug\Obj\clocks.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\init.pbi</file>
+            <file>$TOOLKIT_DIR$\inc\msp430.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\misc.r43</file>
+            <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\init.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\timers.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\ports.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\clocks.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+            <file>$PROJ_DIR$\Debug\Exe\basestation_protocol_v2.d43</file>
+            <file>$PROJ_DIR$\Debug\Obj\ports.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\misc.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\communications.pbi</file>
+            <file>$PROJ_DIR$\Debug\Obj\basestation_protocol_v2.pbd</file>
+            <file>$TOOLKIT_DIR$\inc\dlib\c\stdbool.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\commands.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\communications.r43</file>
+            <file>$PROJ_DIR$\Debug\Exe\basestation_protocol_v2.ulp</file>
+            <file>$TOOLKIT_DIR$\inc\in430.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\timers.r43</file>
+            <file>$TOOLKIT_DIR$\inc\msp430fr2355.h</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\commands.pbi</file>
+            <file>$PROJ_DIR$\Debug\List\basestation_protocol_v2.map</file>
+            <file>$TOOLKIT_DIR$\lib\dlib\dl430xlsfn.r43</file>
+            <file>$PROJ_DIR$\Debug\Obj\ports.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\List\misc.lst</file>
+            <file>$PROJ_DIR$\Debug\Obj\commands.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\main.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\timers.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\List\main.lst</file>
+            <file>$PROJ_DIR$\Debug\List\init.lst</file>
+            <file>$PROJ_DIR$\Debug\List\communications.lst</file>
+            <file>$PROJ_DIR$\Debug\List\commands.lst</file>
+            <file>$PROJ_DIR$\Debug\List\ports.lst</file>
+            <file>$PROJ_DIR$\Debug\Obj\misc.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\clocks.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\List\clocks.lst</file>
+            <file>$TOOLKIT_DIR$\config\linker\lnk430fr2355.xcl</file>
+            <file>$PROJ_DIR$\Debug\Obj\communications.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\Obj\init.__cstat.et</file>
+            <file>$PROJ_DIR$\Debug\List\timers.lst</file>
+            <file>$TOOLKIT_DIR$\config\linker\multiplier32.xcl</file>
+        </outputs>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ULP430</name>
+                    <file> 29</file>
+                </tool>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 21 35</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\init.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 43 16</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 12</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 52</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 7 4 26 13 32 30 15 0</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 15 32 13 26 4 30 0 7</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\communications.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 44 28</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 24</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 51</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 4 26 13 32 30 15 0 7</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 30 7 13 26 32 4 0 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\ports.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 46 22</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 18</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 37</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 7 4 26 13 32 30 15 0</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 30 13 4 7 26 32 0 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\clocks.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 49 19</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 11</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 48</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 4 26 13 32 30 15 0 7</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 0 32 7 13 26 30 15 4</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\commands.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 45 27</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 34</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 39</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 4 26 13 32 30 15 0 7</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 30 7 13 26 32 4 0 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 42 33</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 20</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 40</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 4 26 13 32 30 15 0 7</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 30 7 13 26 32 4 0 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\misc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 38 14</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 23</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 47</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 4 26 13 32 30 15 0 7</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 30 7 13 26 32 4 0 15</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\timers.c</name>
+            <outputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 53 31</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 17</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 41</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICC430</name>
+                    <file> 7 4 26 13 32 30 15 0</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 15 32 13 26 4 30 0 7</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\Debug\Exe\basestation_protocol_v2.d43</name>
+            <outputs>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 35</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>XLINK</name>
+                    <file> 50 54 19 27 28 16 33 14 22 31 36</file>
+                </tool>
+            </inputs>
+        </file>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs />
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>XLINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>
