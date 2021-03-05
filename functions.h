@@ -30,4 +30,9 @@ void preamble(float T,float RT,float TR,float P);
 
 //misc  
 void toggleLEDs(); 
-void delay(int time, int *timer, int *flag, int flagVal); 
+void delay(unsigned int time, unsigned short int *timer, unsigned short int *flag, unsigned int flagVal); 
+
+//comms 
+void tx(char msg[]); 
+void rx(void); 
+void clearRX(char r[]);

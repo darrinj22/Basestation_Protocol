@@ -4,9 +4,9 @@
 #include <stdbool.h> 
 
 // flags 
-extern int sendData; 
+extern unsigned short int sendData; 
 // timers 
-extern int start; 
+extern unsigned short int start; 
 
 void toggleLEDs(){
 if(withinRange(0,50)){
@@ -27,7 +27,7 @@ if(withinRange(150,200)){
 }
 }
 
-void delay(int time, int *timer, int *flag,int flagVal){
+void delay(unsigned int time, unsigned short int*timer, unsigned short int *flag, unsigned int flagVal){
   if(*timer > time){
     *flag = flagVal;
      *timer = 0; 

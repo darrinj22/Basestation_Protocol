@@ -2,12 +2,15 @@
 #include "functions.h" 
 #include "msp430.h"
 #include <stdbool.h>
+
 // timers 
-volatile unsigned int Time_Sequence = clear;
-extern int wait2send = 0 ;
+volatile unsigned short int Time_Sequence = clear;
+extern unsigned short int wait2send = 0;
 //flags
-extern int sendData;
-extern int start;
+extern unsigned short int sendData;
+extern unsigned short int start;
+
+
 void Init_Timer_B0(void) {
 TB0CTL = TBSSEL__SMCLK; // SMCLK source
 TB0CTL |= TBCLR; // Resets TB0R, clock divider, count direction

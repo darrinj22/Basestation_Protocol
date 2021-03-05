@@ -11,8 +11,7 @@ PM5CTL0 &= ~LOCKLPM5;
   Init_Clocks();                       // Initialize Clock System
   enable_interrupts();                   // Initialize Variables and Initial Conditions
   Init_Timer_B0();                       // Initialize Timers
-  Init_UCA0(1);                         // Initialize baudrate to 115k 
-  Init_UCA1(1);                         // '' ''
+  Init_UCA1(1);                         // // Initialize baudrate to 115k
 }
 
 
