@@ -18,7 +18,7 @@ extern unsigned short int start;
 extern unsigned short int transmit; 
 extern unsigned short int msgReceived;
 extern unsigned short int y; 
-
+extern int x; 
 
 void main(void){
 Init_All(); 
