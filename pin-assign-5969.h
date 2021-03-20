@@ -32,11 +32,6 @@
 #define     PDIR_LED2               (P1DIR)
 #define     PLED2OUT                (P1DIR)
 
-// P1.2 - TRANSMIT - OUTPUT
-#define     PIN_TX                  (BIT2)
-#define     PTXOUT                  (P1OUT)
-#define     PTXDIR                  (P1DIR)
-
 // P1.3 - AUX1 -  INPUT/OUTPUT
 #define     PIN_AUX1                (BIT3)
 #define     PAUX1IN                 (P1IN)
@@ -63,9 +58,14 @@
 #define     PIN_ACCEL_MOSI          (BIT6)
 #define     PDIR_ACCEL_MOSI         (PRX_DIR)
 #define     PACCEL_MOSISEL0         (P1SEL0)
-#define     PACCEL_MOSISEL1         (P1SEL1)
+#define     PACCEL_MOSISEL1         (P1SEL1)*/
 
-// P1.7 - ACCEL_MISO - INPUT
+// P1.7 - TRANSMIT - OUTPUT
+#define     PIN_TX                  (BIT7)
+#define     PTXOUT                  (P1OUT)
+#define     PTXDIR                  (P1DIR)
+
+/*// P1.7 - ACCEL_MISO - INPUT
 #define     PIN_ACCEL_MISO          (BIT7)
 #define     PDIR_ACCEL_MISO         (PRX_DIR)
 #define     PACCEL_MISOSEL0         (P1SEL0)
