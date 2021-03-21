@@ -1,4 +1,37 @@
-//Test
+// command codes 
+#define Select_cmd (0x10)
+#define Challenge_cmd (0xD4)
+#define Query_cmd (0x08)
+#define QueryAdjust_cmd (0x09)
+#define QueryRep_cmd (0x00)
+#define ACK_cmd (0x01)
+#define NAK_cmd (0xC0)
+#define Req_RN_cmd (0xC1) 
+#define Read_cmd (0xC2)
+#define Write_cmd (0xC3)
+#define Kill_cmd (0xC4)
+#define Lock_cmd (0xC5)
+#define Access_cmd (0xC6)
+#define BlockWrite_cmd (0xC7)
+#define BlockErase_cmd (0xC8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//setup 
 //MACROS FROM main.c============================================================
 #define ALWAYS                  (1)
 #define RESET_STATE             (0)
