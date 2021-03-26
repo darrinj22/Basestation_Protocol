@@ -68,9 +68,10 @@ void *mainThread(void *arg0)
 
     /* Configure the LED pin */
     GPIO_setConfig(CONFIG_GPIO_LED_0, GPIO_CFG_OUT_STD | GPIO_CFG_OUT_LOW);
-
+    GPIO_setConfig(CONFIG_GPIO_TX, GPIO_CFG_OUT_STD | GPIO_CFG_OUT_LOW);
     /* Turn on user LED */
     GPIO_write(CONFIG_GPIO_LED_0, CONFIG_GPIO_LED_ON);
+    GPIO_write(CONFIG_GPIO_TX,1);
 
     Display_init();
     Display_Handle hSerial = Display_open(Display_Type_UART,NULL);
@@ -79,6 +80,7 @@ void *mainThread(void *arg0)
     while (1) {
         sleep(time);
         GPIO_toggle(CONFIG_GPIO_LED_0);
-        Display_printf(hSerial, 1, 0, "LED Toggle %d", count++);
+        GPIO_toggle(CONFIG_GPIO_TX);
+        Display_printf(hSerial, 1, 0, "OUTPUT %d: %d", count++, GPIO_read(CONFIG_GPIO_TX));
     }
 }
