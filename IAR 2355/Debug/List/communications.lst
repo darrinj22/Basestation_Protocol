@@ -1,0 +1,502 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V7.12.3.989/W32 for MSP430           21/Mar/2021  15:31:48
+# Copyright 1996-2019 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for MSP430, 8K KickStart Edition 7.12
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\communications.c
+#    Command line  =  
+#        -f C:\Users\darri\AppData\Local\Temp\EW9802.tmp
+#        ("C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\communications.c" -lC
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List" -o
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR2355__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\430\lib\dlib\dl430xlsfn.h" -I ./\ --core=430X --data_model=small
+#        -On --multiplier=32 --hw_workaround=CPU40 --code_model=large)
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List\communications.lst
+#    Object file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj\communications.r43
+#
+###############################################################################
+
+C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git BP\Basestation_Protocol\communications.c
+      1          #include  "functions.h"
+      2          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x580
+   \   union <unnamed> _A_UCA1CTLW0_L
+   \                     _A_UCA1CTLW0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x586
+   \   union <unnamed> _A_UCA1BRW_L
+   \                     _A_UCA1BRW_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x588
+   \   union <unnamed> _A_UCA1MCTLW_L
+   \                     _A_UCA1MCTLW_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x58c
+   \   union <unnamed> _A_UCA1RXBUF_L
+   \                     _A_UCA1RXBUF_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x58e
+   \   union <unnamed> _A_UCA1TXBUF_L
+   \                     _A_UCA1TXBUF_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x59a
+   \   union <unnamed> _A_UCA1IE_L
+   \                     _A_UCA1IE_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x59e
+   \   union <unnamed> _A_UCA1IV_L
+   \                     _A_UCA1IV_L:
+   \   000000                DS8 2
+      3          #include "macros.h"
+      4          #include <string.h>
+      5          // general globals 
+      6          extern int location; 
+
+   \                                 In  segment DATA16_Z, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+      7          char RX[32] = {'\0'}; 
+   \                     RX:
+   \   000000                DS8 32
+
+   \                                 In  segment DATA16_Z, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+      8          extern char holding[32] = {'\0'}; 
+   \                     holding:
+   \   000000                DS8 32
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+      9          int RX_iterator = 0 ;
+   \                     RX_iterator:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     10          int RX_location = 0 ; 
+   \                     RX_location:
+   \   000000                DS8 2
+     11          
+     12          //timers 
+     13          extern volatile unsigned short int Time_Sequence;
+     14          extern unsigned short int wait2send; 
+     15          
+     16          //flags 
+     17          extern unsigned short int sendData;
+
+   \                                 In  segment DATA16_I, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_copy
+     18          extern unsigned short int start = 1; 
+   \                     start:
+   \   000000                DS8 2
+   \   000002                REQUIRE `?<Initializer for start>`
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     19          extern unsigned short int transmit = 0; 
+   \                     transmit:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     20          extern unsigned short int msgReceived = 0;
+   \                     msgReceived:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     21          extern unsigned short int y = 0; 
+   \                     y:
+   \   000000                DS8 2
+     22          
+     23          
+     24          // transfer message function 
+     25          
+
+   \                                 In  segment CODE, align 2
+     26          void tx_msg(char msg[]){
+   \                     tx_msg:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   0A4C         MOV.W   R12, R10
+     27             while(msg[location] != '\0'){
+   \                     ??tx_msg_0:
+   \   000004   0F4A         MOV.W   R10, R15
+   \   000006   1F52....     ADD.W   &location, R15
+   \   00000A   CF930000     CMP.B   #0x0, 0(R15)
+   \   00000E   2324         JEQ     ??tx_msg_3
+     28                  switch(transmit){
+   \   000010   1F42....     MOV.W   &transmit, R15
+   \   000014   0F83         SUB.W   #0x0, R15
+   \   000016   0324         JEQ     ??tx_msg_4
+   \   000018   1F83         SUB.W   #0x1, R15
+   \   00001A   0D24         JEQ     ??tx_msg_5
+   \   00001C   F33F         JMP     ??tx_msg_0
+     29                  case 0: 
+     30                  UCA1TXBUF = msg[location];
+   \                     ??tx_msg_4:
+   \   00001E   0F4A         MOV.W   R10, R15
+   \   000020   1F52....     ADD.W   &location, R15
+   \   000024   6F4F         MOV.B   @R15, R15
+   \   000026   4F4F         MOV.B   R15, R15
+   \   000028   824F8E05     MOV.W   R15, &0x58e
+     31                  transmit = 1; 
+   \   00002C   9243....     MOV.W   #0x1, &transmit
+     32                  start = 1; 
+   \   000030   9243....     MOV.W   #0x1, &start
+     33                  break; 
+   \   000034   E73F         JMP     ??tx_msg_0
+     34                  case 1: 
+     35                    delay(0,&wait2send,&start,0);
+   \                     ??tx_msg_5:
+   \   000036   0F43         MOV.W   #0x0, R15
+   \   000038   3E40....     MOV.W   #start, R14
+   \   00003C   3D40....     MOV.W   #wait2send, R13
+   \   000040   0C43         MOV.W   #0x0, R12
+   \   000042   ........     CALLA   #delay
+     36                    if(start == 0){
+   \   000046   8293....     CMP.W   #0x0, &start
+   \   00004A   DC23         JNE     ??tx_msg_0
+     37                      transmit = 0;
+   \   00004C   8243....     MOV.W   #0x0, &transmit
+     38                      location++;
+   \   000050   9253....     ADD.W   #0x1, &location
+     39                    }
+     40                    break; 
+   \   000054   D73F         JMP     ??tx_msg_0
+     41                  default:
+     42                    break; 
+     43                  }
+     44                }
+     45               location = 0; 
+   \                     ??tx_msg_3:
+   \   000056   8243....     MOV.W   #0x0, &location
+     46               sendData = 2; 
+   \   00005A   A243....     MOV.W   #0x2, &sendData
+     47             
+     48          }
+   \   00005E   3A41         POP.W   R10
+   \   000060   1001         RETA
+   \   000062                REQUIRE _A_UCA1TXBUF_L
+
+   \                                 In  segment CODE, align 2
+     49          void tx_cmd(int msg[]){
+   \                     tx_cmd:
+   \   000000   0A12         PUSH.W  R10
+   \   000002   0A4C         MOV.W   R12, R10
+     50             while(msg[location] != '\0'){
+   \                     ??tx_cmd_0:
+   \   000004   1F42....     MOV.W   &location, R15
+   \   000008   0F5F         RLA.W   R15
+   \   00000A   0E4A         MOV.W   R10, R14
+   \   00000C   0E5F         ADD.W   R15, R14
+   \   00000E   8E930000     CMP.W   #0x0, 0(R14)
+   \   000012   2324         JEQ     ??tx_cmd_3
+     51                  switch(transmit){
+   \   000014   1F42....     MOV.W   &transmit, R15
+   \   000018   0F83         SUB.W   #0x0, R15
+   \   00001A   0324         JEQ     ??tx_cmd_4
+   \   00001C   1F83         SUB.W   #0x1, R15
+   \   00001E   0D24         JEQ     ??tx_cmd_5
+   \   000020   F13F         JMP     ??tx_cmd_0
+     52                  case 0: 
+     53                  UCA1TXBUF = msg[location];
+   \                     ??tx_cmd_4:
+   \   000022   1F42....     MOV.W   &location, R15
+   \   000026   0F5F         RLA.W   R15
+   \   000028   0E4A         MOV.W   R10, R14
+   \   00002A   0E5F         ADD.W   R15, R14
+   \   00002C   A24E8E05     MOV.W   @R14, &0x58e
+     54                  transmit = 1; 
+   \   000030   9243....     MOV.W   #0x1, &transmit
+     55                  start = 1; 
+   \   000034   9243....     MOV.W   #0x1, &start
+     56                  break; 
+   \   000038   E53F         JMP     ??tx_cmd_0
+     57                  case 1: 
+     58                    delay(0,&wait2send,&start,0);
+   \                     ??tx_cmd_5:
+   \   00003A   0F43         MOV.W   #0x0, R15
+   \   00003C   3E40....     MOV.W   #start, R14
+   \   000040   3D40....     MOV.W   #wait2send, R13
+   \   000044   0C43         MOV.W   #0x0, R12
+   \   000046   ........     CALLA   #delay
+     59                    if(start == 0){
+   \   00004A   8293....     CMP.W   #0x0, &start
+   \   00004E   DA23         JNE     ??tx_cmd_0
+     60                      transmit = 0;
+   \   000050   8243....     MOV.W   #0x0, &transmit
+     61                      location++;
+   \   000054   9253....     ADD.W   #0x1, &location
+     62                    }
+     63                    break; 
+   \   000058   D53F         JMP     ??tx_cmd_0
+     64                  default:
+     65                    break; 
+     66                  }
+     67                }
+     68               location = 0; 
+   \                     ??tx_cmd_3:
+   \   00005A   8243....     MOV.W   #0x0, &location
+     69               sendData = 2; 
+   \   00005E   A243....     MOV.W   #0x2, &sendData
+     70             
+     71          }
+   \   000062   3A41         POP.W   R10
+   \   000064   1001         RETA
+   \   000066                REQUIRE _A_UCA1TXBUF_L
+     72          
+     73          // receive message function 
+     74          
+
+   \                                 In  segment CODE, align 2
+     75          void rx(void){
+   \                     rx:
+     76            if(msgReceived){
+   \   000000   8293....     CMP.W   #0x0, &msgReceived
+   \   000004   1424         JEQ     ??rx_0
+     77              clearRX(holding); 
+   \   000006   3C40....     MOV.W   #holding, R12
+   \   00000A   ........     CALLA   #clearRX
+     78                  strcpy(holding,RX); 
+   \   00000E   3D40....     MOV.W   #RX, R13
+   \   000012   3C40....     MOV.W   #holding, R12
+   \   000016   ........     CALLA   #strcpy
+     79                  msgReceived = 0 ; 
+   \   00001A   8243....     MOV.W   #0x0, &msgReceived
+     80                sendData = 1; 
+   \   00001E   9243....     MOV.W   #0x1, &sendData
+     81                y = 1; 
+   \   000022   9243....     MOV.W   #0x1, &y
+     82                clearRX(RX); 
+   \   000026   3C40....     MOV.W   #RX, R12
+   \   00002A   ........     CALLA   #clearRX
+     83                }
+     84            
+     85          }
+   \                     ??rx_0:
+   \   00002E   1001         RETA
+     86          
+
+   \                                 In  segment CODE, align 2
+     87          void clearRX(char r[]){
+   \                     clearRX:
+     88            RX_location = 0 ; 
+   \   000000   8243....     MOV.W   #0x0, &RX_location
+     89            RX_iterator = 0 ; 
+   \   000004   8243....     MOV.W   #0x0, &RX_iterator
+     90              for(int i = 0 ; i < 32 ; i++){
+   \   000008   0E43         MOV.W   #0x0, R14
+   \                     ??clearRX_0:
+   \   00000A   3E902000     CMP.W   #0x20, R14
+   \   00000E   0634         JGE     ??clearRX_1
+     91              r[i] = '\0'; 
+   \   000010   0F4C         MOV.W   R12, R15
+   \   000012   0F5E         ADD.W   R14, R15
+   \   000014   CF430000     MOV.B   #0x0, 0(R15)
+     92            }
+   \   000018   1E53         ADD.W   #0x1, R14
+   \   00001A   F73F         JMP     ??clearRX_0
+     93          }
+   \                     ??clearRX_1:
+   \   00001C   1001         RETA
+     94          
+     95          
+
+   \                                 In  segment CODE, align 2
+     96          void Init_UCA1(int baudRate_A1){
+   \                     Init_UCA1:
+     97          // Configure UART 0
+     98           UCA1TXBUF = clear; 
+   \   000000   82438E05     MOV.W   #0x0, &0x58e
+     99          UCA1CTLW0 = clear; // Use word register
+   \   000004   82438005     MOV.W   #0x0, &0x580
+    100          UCA1CTLW0 |= UCSWRST; // Set Software reset enable
+   \   000008   92D38005     BIS.W   #0x1, &0x580
+    101          UCA1CTLW0 |= UCSSEL__SMCLK; // Set SMCLK as fBRCLK
+   \   00000C   B2D080008005 BIS.W   #0x80, &0x580
+    102          
+    103          if(baudRate_A1 == positive){
+   \   000012   1C93         CMP.W   #0x1, R12
+   \   000014   0620         JNE     ??Init_UCA1_1
+    104          UCA1BRW = 0x04; // 115200 Baud
+   \   000016   A2428605     MOV.W   #0x4, &0x586
+    105          UCA1MCTLW = 0x5551 ;
+   \   00001A   B24051558805 MOV.W   #0x5551, &0x588
+   \   000020   063C         JMP     ??Init_UCA1_0
+    106          }else{
+    107            UCA1BRW = 0x11; // 460800 Baud
+   \                     ??Init_UCA1_1:
+   \   000022   B24011008605 MOV.W   #0x11, &0x586
+    108          UCA1MCTLW = 0x4A ;
+   \   000028   B2404A008805 MOV.W   #0x4a, &0x588
+    109          }
+    110          
+    111          UCA1CTLW0 &= ~UCSWRST; // Set Software reset enable
+   \                     ??Init_UCA1_0:
+   \   00002E   92C38005     BIC.W   #0x1, &0x580
+    112          UCA1IE |= UCRXIE; // Enable RX Interrupt 
+   \   000032   92D39A05     BIS.W   #0x1, &0x59a
+    113          }
+   \   000036   1001         RETA
+   \   000038                REQUIRE _A_UCA1TXBUF_L
+   \   000038                REQUIRE _A_UCA1CTLW0_L
+   \   000038                REQUIRE _A_UCA1BRW_L
+   \   000038                REQUIRE _A_UCA1MCTLW_L
+   \   000038                REQUIRE _A_UCA1IE_L
+    114          
+    115          #pragma vector=EUSCI_A1_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+    116          __interrupt void eUSCI_A1_ISR(void){
+   \                     eUSCI_A1_ISR:
+   \   000000   1F15         PUSHM.W #0x2, R15
+    117          //unsigned int temp1;
+    118          switch(__even_in_range(UCA1IV,8)){
+   \   000002   1F429E05     MOV.W   &0x59e, R15
+   \   000006   E00F         ADDA    R15, PC
+   \                     `?<Jumptable for eUSCI_A1_ISR>_0`:
+   \   000008   153C         JMP     ??eUSCI_A1_ISR_2
+   \   00000A   033C         JMP     ??eUSCI_A1_ISR_3
+   \   00000C   133C         JMP     ??eUSCI_A1_ISR_2
+   \   00000E   123C         JMP     ??eUSCI_A1_ISR_2
+   \   000010   113C         JMP     ??eUSCI_A1_ISR_2
+    119          case 0: // Vector 0 - no interrupt
+    120          break;
+    121          case 2: // Vector 2 – RXIFG
+    122          // this circle ring buffer works:   
+    123          // RX_location = RX_iterator++; 
+    124          // RX[RX_location] = UCA1RXBUF; 
+    125          // if(RX_iterator >= 32){RX_iterator = 0 ;}
+    126            
+    127            // this limits input to 32 chars 
+    128            RX_location = RX_iterator++; 
+   \                     ??eUSCI_A1_ISR_3:
+   \   000012   9242........ MOV.W   &RX_iterator, &RX_location
+   \   000018   9253....     ADD.W   #0x1, &RX_iterator
+    129            RX[RX_location] = UCA1RXBUF; 
+   \   00001C   1E428C05     MOV.W   &0x58c, R14
+   \   000020   1F42....     MOV.W   &RX_location, R15
+   \   000024   CF4E....     MOV.B   R14, RX(R15)
+    130          
+    131          if(UCA1RXBUF == '\n'){
+   \   000028   B2900A008C05 CMP.W   #0xa, &0x58c
+   \   00002E   0220         JNE     ??eUSCI_A1_ISR_2
+    132            msgReceived = 1; 
+   \   000030   9243....     MOV.W   #0x1, &msgReceived
+    133          } // we know the message has ended 
+    134          
+    135          
+    136          
+    137            // for now we can go off of a character to say the message is done, later 
+    138            // we may want to go to time elapsed to signal that a message is done
+    139            // i.e. 1 ms has passed since last received character so assume message is done  
+    140          
+    141          
+    142          break;
+    143          case 4:
+    144          
+    145          break;
+    146          default: break; 
+    147          
+    148          }
+    149          }
+   \                     ??eUSCI_A1_ISR_2:
+   \   000034   1E17         POPM.W  #0x2, R15
+   \   000036   0013         RETI
+   \   000038                REQUIRE _A_UCA1RXBUF_L
+   \   000038                REQUIRE _A_UCA1IV_L
+
+   \                                 In  segment INTVEC, offset 0x40, root
+   \                     `??eUSCI_A1_ISR::??INTVEC 64`:
+   \   000040   ....         DC16    eUSCI_A1_ISR
+
+   \                                 In  segment DATA16_ID, align 2, align-sorted
+   \                     `?<Initializer for start>`:
+   \   000000   0100         DC16 1
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   Init_UCA1
+      4   clearRX
+      8   eUSCI_A1_ISR
+      4   rx
+        4   -> clearRX
+        4   -> strcpy
+      6   tx_cmd
+        6   -> delay
+      6   tx_msg
+        6   -> delay
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  ?<Initializer for start>
+      56  Init_UCA1
+      32  RX
+       2  RX_iterator
+       2  RX_location
+       2  _A_UCA1BRW_L
+       2  _A_UCA1CTLW0_L
+       2  _A_UCA1IE_L
+       2  _A_UCA1IV_L
+       2  _A_UCA1MCTLW_L
+       2  _A_UCA1RXBUF_L
+       2  _A_UCA1TXBUF_L
+      30  clearRX
+      56  eUSCI_A1_ISR
+       2  eUSCI_A1_ISR::??INTVEC 64
+      32  holding
+       2  msgReceived
+      48  rx
+       2  start
+       2  transmit
+     102  tx_cmd
+      98  tx_msg
+       2  y
+
+ 
+ 334 bytes in segment CODE
+  14 bytes in segment DATA16_AN
+   2 bytes in segment DATA16_I
+   2 bytes in segment DATA16_ID
+  74 bytes in segment DATA16_Z
+   2 bytes in segment INTVEC
+  56 bytes in segment ISR_CODE
+ 
+ 390 bytes of CODE  memory
+   2 bytes of CONST memory (+  2 bytes shared)
+  76 bytes of DATA  memory (+ 14 bytes shared)
+
+Errors: none
+Warnings: none

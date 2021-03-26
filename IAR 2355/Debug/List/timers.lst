@@ -1,0 +1,320 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V7.12.3.989/W32 for MSP430           21/Mar/2021  15:31:49
+# Copyright 1996-2019 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for MSP430, 8K KickStart Edition 7.12
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\timers.c
+#    Command line  =  
+#        -f C:\Users\darri\AppData\Local\Temp\EW99AC.tmp
+#        ("C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\timers.c" -lC
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List" -o
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR2355__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\430\lib\dlib\dl430xlsfn.h" -I ./\ --core=430X --data_model=small
+#        -On --multiplier=32 --hw_workaround=CPU40 --code_model=large)
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List\timers.lst
+#    Object file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj\timers.r43
+#
+###############################################################################
+
+C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git BP\Basestation_Protocol\timers.c
+      1          #include "macros.h" 
+      2          #include "functions.h" 
+      3          #include "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x380
+   \   union <unnamed> _A_TB0CTL_L
+   \                     _A_TB0CTL_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x382
+   \   union <unnamed> _A_TB0CCTL0_L
+   \                     _A_TB0CCTL0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x384
+   \   union <unnamed> _A_TB0CCTL1_L
+   \                     _A_TB0CCTL1_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x386
+   \   union <unnamed> _A_TB0CCTL2_L
+   \                     _A_TB0CCTL2_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x392
+   \   union <unnamed> _A_TB0CCR0_L
+   \                     _A_TB0CCR0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x394
+   \   union <unnamed> _A_TB0CCR1_L
+   \                     _A_TB0CCR1_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x396
+   \   union <unnamed> _A_TB0CCR2_L
+   \                     _A_TB0CCR2_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x3a0
+   \   union <unnamed> _A_TB0EX0_L
+   \                     _A_TB0EX0_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x3ae
+   \   union <unnamed> _A_TB0IV_L
+   \                     _A_TB0IV_L:
+   \   000000                DS8 2
+      4          #include <stdbool.h>
+      5          
+      6          // timers 
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+      7          volatile unsigned short int Time_Sequence = clear;
+   \                     Time_Sequence:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_Z, align 2, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+      8          extern unsigned short int wait2send = 0;
+   \                     wait2send:
+   \   000000                DS8 2
+      9          //flags
+     10          extern unsigned short int sendData;
+     11          extern unsigned short int start;
+     12          
+     13          
+
+   \                                 In  segment CODE, align 2
+     14          void Init_Timer_B0(void) {
+   \                     Init_Timer_B0:
+     15          TB0CTL = TBSSEL__SMCLK; // SMCLK source
+   \   000000   B24000028003 MOV.W   #0x200, &0x380
+     16          TB0CTL |= TBCLR; // Resets TB0R, clock divider, count direction
+   \   000006   A2D28003     BIS.W   #0x4, &0x380
+     17          TB0CTL |= MC__CONTINOUS; // Continuous up
+   \   00000A   B2D020008003 BIS.W   #0x20, &0x380
+     18          TB0CTL |= ID_1; // Divide clock by 2
+   \   000010   B2D040008003 BIS.W   #0x40, &0x380
+     19          TB0EX0 = TBIDEX_7; // Divide clock by an additional 8
+   \   000016   B2400700A003 MOV.W   #0x7, &0x3a0
+     20          TB0CCR0 = TB0CCR0_INTERVAL; // CCR0
+   \   00001C   B240A8619203 MOV.W   #0x61a8, &0x392
+     21          TB0CCTL0 |= CCIE; // CCR0 enable interrupt
+   \   000022   B2D010008203 BIS.W   #0x10, &0x382
+     22          TB0CCR1 = TB0CCR1_INTERVAL; // CCR1
+   \   000028   B240A8619403 MOV.W   #0x61a8, &0x394
+     23          TB0CCTL1 |= CCIE; // CCR1 enable interrupt
+   \   00002E   B2D010008403 BIS.W   #0x10, &0x384
+     24          TB0CCR2 = TB0CCR2_INTERVAL; // CCR2
+   \   000034   B240A8619603 MOV.W   #0x61a8, &0x396
+     25          TB0CCTL2 |= CCIE; // CCR2 enable interrupt
+   \   00003A   B2D010008603 BIS.W   #0x10, &0x386
+     26          TB0CTL &= ~TBIE; // Disable Overflow Interrupt
+   \   000040   A2C38003     BIC.W   #0x2, &0x380
+     27          TB0CTL &= ~TBIFG; // Clear Overflow Interrupt flag
+   \   000044   92C38003     BIC.W   #0x1, &0x380
+     28          }
+   \   000048   1001         RETA
+   \   00004A                REQUIRE _A_TB0CTL_L
+   \   00004A                REQUIRE _A_TB0EX0_L
+   \   00004A                REQUIRE _A_TB0CCR0_L
+   \   00004A                REQUIRE _A_TB0CCTL0_L
+   \   00004A                REQUIRE _A_TB0CCR1_L
+   \   00004A                REQUIRE _A_TB0CCTL1_L
+   \   00004A                REQUIRE _A_TB0CCR2_L
+   \   00004A                REQUIRE _A_TB0CCTL2_L
+     29          
+     30          
+
+   \                                 In  segment CODE, align 2
+     31          bool withinRange(int x,int y){
+   \                     withinRange:
+   \   000000   0F4C         MOV.W   R12, R15
+     32            if(Time_Sequence > x && Time_Sequence < y){
+   \   000002   1F92....     CMP.W   &Time_Sequence, R15
+   \   000006   052C         JC      ??withinRange_0
+   \   000008   829D....     CMP.W   R13, &Time_Sequence
+   \   00000C   022C         JC      ??withinRange_0
+     33              return true; 
+   \   00000E   5C43         MOV.B   #0x1, R12
+   \   000010   1001         RETA
+     34            }else{return false;} 
+   \                     ??withinRange_0:
+   \   000012   4C43         MOV.B   #0x0, R12
+   \   000014   1001         RETA
+     35          }
+     36          
+     37          // interrupt for timer B0, increments time sequence
+     38          
+     39          #pragma vector = TIMER0_B0_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     40          __interrupt void Timer0_B0_ISR(void){
+   \                     Timer0_B0_ISR:
+     41          //------------------------------------------------------------------------------
+     42          // TimerB0 0 Interrupt handler
+     43          //----------------------------------------------------------------------------
+     44           
+     45          Time_Sequence++; 
+   \   000000   9253....     ADD.W   #0x1, &Time_Sequence
+     46          
+     47          if(Time_Sequence > 200){
+   \   000004   B290C900.... CMP.W   #0xc9, &Time_Sequence
+   \   00000A   0228         JNC     ??Timer0_B0_ISR_0
+     48            Time_Sequence = clear; 
+   \   00000C   8243....     MOV.W   #0x0, &Time_Sequence
+     49          }
+     50          
+     51          if(sendData == 2 || start == 1){
+   \                     ??Timer0_B0_ISR_0:
+   \   000010   A293....     CMP.W   #0x2, &sendData
+   \   000014   0324         JEQ     ??Timer0_B0_ISR_1
+   \   000016   9293....     CMP.W   #0x1, &start
+   \   00001A   0220         JNE     ??Timer0_B0_ISR_2
+     52            wait2send++; 
+   \                     ??Timer0_B0_ISR_1:
+   \   00001C   9253....     ADD.W   #0x1, &wait2send
+     53          }
+     54          
+     55          
+     56          
+     57           TB0CCR0 += TB0CCR0_INTERVAL; // Add Offset to TBCCR0 
+   \                     ??Timer0_B0_ISR_2:
+   \   000020   B250A8619203 ADD.W   #0x61a8, &0x392
+     58          }
+   \   000026   0013         RETI
+   \   000028                REQUIRE _A_TB0CCR0_L
+     59          
+     60          //----------------------------------------------------------------------------
+     61          
+     62          
+     63          
+     64          // interrupt for timer B0, deals with debouncing 
+     65          
+     66          
+     67          #pragma vector=TIMER0_B1_VECTOR
+
+   \                                 In  segment ISR_CODE, align 2
+     68          __interrupt void TIMER0_B1_ISR(void){
+   \                     TIMER0_B1_ISR:
+   \   000000   0F12         PUSH.W  R15
+     69          //----------------------------------------------------------------------------
+     70          // TimerB0 1-2, Overflow Interrupt Vector (TBIV) handler
+     71          //----------------------------------------------------------------------------
+     72          switch(__even_in_range(TB0IV,14)){
+   \   000002   1F42AE03     MOV.W   &0x3ae, R15
+   \   000006   E00F         ADDA    R15, PC
+   \                     `?<Jumptable for TIMER0_B1_ISR>_0`:
+   \   000008   0E3C         JMP     ??TIMER0_B1_ISR_1
+   \   00000A   063C         JMP     ??TIMER0_B1_ISR_2
+   \   00000C   093C         JMP     ??TIMER0_B1_ISR_3
+   \   00000E   0B3C         JMP     ??TIMER0_B1_ISR_1
+   \   000010   0A3C         JMP     ??TIMER0_B1_ISR_1
+   \   000012   093C         JMP     ??TIMER0_B1_ISR_1
+   \   000014   083C         JMP     ??TIMER0_B1_ISR_1
+   \   000016   073C         JMP     ??TIMER0_B1_ISR_1
+     73          case 0: break; // No interrupt
+     74          case 2: // CCR1 not used
+     75          
+     76          
+     77          TB0CCR1 += TB0CCR1_INTERVAL; // Add Offset to TBCCR1
+   \                     ??TIMER0_B1_ISR_2:
+   \   000018   B250A8619403 ADD.W   #0x61a8, &0x394
+     78          break;
+   \   00001E   033C         JMP     ??TIMER0_B1_ISR_1
+     79          case 4: // CCR2 not used
+     80          
+     81          TB0CCR2 += TB0CCR2_INTERVAL; // Add Offset to TBCCR2
+   \                     ??TIMER0_B1_ISR_3:
+   \   000020   B250A8619603 ADD.W   #0x61a8, &0x396
+     82          break;
+     83          case 14: // overflow
+     84          //...... Add What you need happen in the interrupt ......
+     85          break;
+     86          default: break;
+     87          }
+     88          }//--------
+   \                     ??TIMER0_B1_ISR_1:
+   \   000026   3F41         POP.W   R15
+   \   000028   0013         RETI
+   \   00002A                REQUIRE _A_TB0CCR1_L
+   \   00002A                REQUIRE _A_TB0CCR2_L
+   \   00002A                REQUIRE _A_TB0IV_L
+
+   \                                 In  segment INTVEC, offset 0x54, root
+   \                     `??TIMER0_B1_ISR::??INTVEC 84`:
+   \   000054   ....         DC16    TIMER0_B1_ISR
+
+   \                                 In  segment INTVEC, offset 0x56, root
+   \                     `??Timer0_B0_ISR::??INTVEC 86`:
+   \   000056   ....         DC16    Timer0_B0_ISR
+     89          
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   Init_Timer_B0
+      6   TIMER0_B1_ISR
+      4   Timer0_B0_ISR
+      4   withinRange
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      74  Init_Timer_B0
+      42  TIMER0_B1_ISR
+       2  TIMER0_B1_ISR::??INTVEC 84
+       2  Time_Sequence
+      40  Timer0_B0_ISR
+       2  Timer0_B0_ISR::??INTVEC 86
+       2  _A_TB0CCR0_L
+       2  _A_TB0CCR1_L
+       2  _A_TB0CCR2_L
+       2  _A_TB0CCTL0_L
+       2  _A_TB0CCTL1_L
+       2  _A_TB0CCTL2_L
+       2  _A_TB0CTL_L
+       2  _A_TB0EX0_L
+       2  _A_TB0IV_L
+       2  wait2send
+      22  withinRange
+
+ 
+ 96 bytes in segment CODE
+ 18 bytes in segment DATA16_AN
+  4 bytes in segment DATA16_Z
+  4 bytes in segment INTVEC
+ 82 bytes in segment ISR_CODE
+ 
+ 178 bytes of CODE  memory
+   0 bytes of CONST memory (+  4 bytes shared)
+   4 bytes of DATA  memory (+ 18 bytes shared)
+
+Errors: none
+Warnings: none

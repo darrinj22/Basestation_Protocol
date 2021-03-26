@@ -1,0 +1,113 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V7.12.3.989/W32 for MSP430           21/Mar/2021  15:31:48
+# Copyright 1996-2019 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for MSP430, 8K KickStart Edition 7.12
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\init.c
+#    Command line  =  
+#        -f C:\Users\darri\AppData\Local\Temp\EW9801.tmp
+#        ("C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\init.c" -lC
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List" -o
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR2355__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\430\lib\dlib\dl430xlsfn.h" -I ./\ --core=430X --data_model=small
+#        -On --multiplier=32 --hw_workaround=CPU40 --code_model=large)
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List\init.lst
+#    Object file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj\init.r43
+#
+###############################################################################
+
+C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git BP\Basestation_Protocol\init.c
+      1          #include "macros.h" 
+      2          #include "functions.h"
+      3          #include "msp430.h" 
+
+   \                                 In  segment DATA16_AN, at 0x130
+   \   union <unnamed> _A_PM5CTL0_L
+   \                     _A_PM5CTL0_L:
+   \   000000                DS8 2
+      4          
+      5          
+      6          extern volatile unsigned int Time_Sequence;
+      7          extern volatile char one_time;
+
+   \                                 In  segment CODE, align 2
+      8          void Init_All(void){
+   \                     Init_All:
+      9          PM5CTL0 &= ~LOCKLPM5;
+   \   000000   92C33001     BIC.W   #0x1, &0x130
+     10            Init_Ports();                        // Initialize Ports
+   \   000004   ........     CALLA   #Init_Ports
+     11            Init_Clocks();                       // Initialize Clock System
+   \   000008   ........     CALLA   #Init_Clocks
+     12            enable_interrupts();                   // Initialize Variables and Initial Conditions
+   \   00000C   ........     CALLA   #enable_interrupts
+     13            Init_Timer_B0();                       // Initialize Timers
+   \   000010   ........     CALLA   #Init_Timer_B0
+     14            Init_UCA1(1);                         // // Initialize baudrate to 115k
+   \   000014   1C43         MOV.W   #0x1, R12
+   \   000016   ........     BRA     #Init_UCA1
+   \   00001A                REQUIRE _A_PM5CTL0_L
+     15          }
+     16          
+     17          
+
+   \                                 In  segment CODE, align 2
+     18          void enable_interrupts(void){
+   \                     enable_interrupts:
+     19            __bis_SR_register(GIE);
+   \   000000   0343         NOP
+   \   000002   32D2         BIS.W   #0x8, SR
+     20          }
+   \   000004   1001         RETA
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+      4   Init_All
+        4   -> Init_Clocks
+        4   -> Init_Ports
+        4   -> Init_Timer_B0
+        0   -> Init_UCA1
+        4   -> enable_interrupts
+      4   enable_interrupts
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+      26  Init_All
+       2  _A_PM5CTL0_L
+       6  enable_interrupts
+
+ 
+ 32 bytes in segment CODE
+  2 bytes in segment DATA16_AN
+ 
+ 32 bytes of CODE memory
+  0 bytes of DATA memory (+ 2 bytes shared)
+
+Errors: none
+Warnings: none

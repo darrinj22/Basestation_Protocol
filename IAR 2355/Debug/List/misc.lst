@@ -1,0 +1,215 @@
+###############################################################################
+#
+# IAR C/C++ Compiler V7.12.3.989/W32 for MSP430           21/Mar/2021  15:31:49
+# Copyright 1996-2019 IAR Systems AB.
+# PC-locked license - IAR Embedded Workbench for MSP430, 8K KickStart Edition 7.12
+#
+#    __rt_version  =  3
+#    __double_size =  32
+#    __reg_r4      =  free
+#    __reg_r5      =  free
+#    __pic         =  no
+#    __core        =  430X
+#    __data_model  =  small
+#    __code_model  =  large
+#    Source file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\misc.c
+#    Command line  =  
+#        -f C:\Users\darri\AppData\Local\Temp\EW992D.tmp
+#        ("C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\misc.c" -lC
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List" -o
+#        "C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj" --no_cse --no_unroll --no_inline
+#        --no_code_motion --no_tbaa --debug -D__MSP430FR2355__ -e --double=32
+#        --dlib_config "C:\Program Files (x86)\IAR Systems\Embedded Workbench
+#        8.0\430\lib\dlib\dl430xlsfn.h" -I ./\ --core=430X --data_model=small
+#        -On --multiplier=32 --hw_workaround=CPU40 --code_model=large)
+#    Locale        =  English_USA.1252
+#    List file     =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\List\misc.lst
+#    Object file   =  
+#        C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git
+#        BP\Basestation_Protocol\Debug\Obj\misc.r43
+#
+###############################################################################
+
+C:\Users\darri\OneDrive\Desktop\Spring 2021\ECE 484\local Git BP\Basestation_Protocol\misc.c
+      1          #include  "functions.h"
+      2          #include  "msp430.h"
+
+   \                                 In  segment DATA16_AN, at 0x202
+   \   union <unnamed> _A_PAOUT_L
+   \                     _A_PAOUT_L:
+   \   000000                DS8 2
+
+   \                                 In  segment DATA16_AN, at 0x242
+   \   union <unnamed> _A_PCOUT_L
+   \                     _A_PCOUT_L:
+   \   000000                DS8 2
+      3          #include "macros.h"
+      4          #include <stdbool.h> 
+      5          
+      6          // flags 
+      7          extern unsigned short int sendData; 
+      8          // timers 
+      9          extern unsigned short int start; 
+     10          // buffers
+
+   \                                 In  segment DATA16_Z, align 1, align-sorted
+   \   000000                REQUIRE ?cstart_init_zero
+     11           char binNum[32]; 
+   \                     binNum:
+   \   000000                DS8 32
+     12           
+
+   \                                 In  segment CODE, align 2
+     13          void toggleLEDs(){
+   \                     toggleLEDs:
+     14          if(withinRange(0,50)){
+   \   000000   3D403200     MOV.W   #0x32, R13
+   \   000004   0C43         MOV.W   #0x0, R12
+   \   000006   ........     CALLA   #withinRange
+   \   00000A   4C93         CMP.B   #0x0, R12
+   \   00000C   0524         JEQ     ??toggleLEDs_0
+     15          P1OUT |= RED_LED;
+   \   00000E   D2D30202     BIS.B   #0x1, &0x202
+     16          P6OUT &= ~GRN_LED; 
+   \   000012   F2C040004302 BIC.B   #0x40, &0x243
+     17          }
+     18          if(withinRange(50,100)){
+   \                     ??toggleLEDs_0:
+   \   000018   3D406400     MOV.W   #0x64, R13
+   \   00001C   3C403200     MOV.W   #0x32, R12
+   \   000020   ........     CALLA   #withinRange
+   \   000024   4C93         CMP.B   #0x0, R12
+   \   000026   0524         JEQ     ??toggleLEDs_1
+     19            P1OUT &= ~RED_LED;
+   \   000028   D2C30202     BIC.B   #0x1, &0x202
+     20            P6OUT |= GRN_LED; 
+   \   00002C   F2D040004302 BIS.B   #0x40, &0x243
+     21          }
+     22          if(withinRange(100,150)){
+   \                     ??toggleLEDs_1:
+   \   000032   3D409600     MOV.W   #0x96, R13
+   \   000036   3C406400     MOV.W   #0x64, R12
+   \   00003A   ........     CALLA   #withinRange
+   \   00003E   4C93         CMP.B   #0x0, R12
+   \   000040   0524         JEQ     ??toggleLEDs_2
+     23            P1OUT |= RED_LED;
+   \   000042   D2D30202     BIS.B   #0x1, &0x202
+     24          P6OUT &= ~GRN_LED; 
+   \   000046   F2C040004302 BIC.B   #0x40, &0x243
+     25          }
+     26          if(withinRange(150,200)){
+   \                     ??toggleLEDs_2:
+   \   00004C   3D40C800     MOV.W   #0xc8, R13
+   \   000050   3C409600     MOV.W   #0x96, R12
+   \   000054   ........     CALLA   #withinRange
+   \   000058   4C93         CMP.B   #0x0, R12
+   \   00005A   0524         JEQ     ??toggleLEDs_3
+     27            P1OUT &= ~RED_LED;
+   \   00005C   D2C30202     BIC.B   #0x1, &0x202
+     28            P6OUT |= GRN_LED; 
+   \   000060   F2D040004302 BIS.B   #0x40, &0x243
+     29          }
+     30          }
+   \                     ??toggleLEDs_3:
+   \   000066   1001         RETA
+   \   000068                REQUIRE _A_PAOUT_L
+   \   000068                REQUIRE _A_PCOUT_L
+     31          
+
+   \                                 In  segment CODE, align 2
+     32          void delay(unsigned int time, unsigned short int*timer, unsigned short int *flag, unsigned int flagVal){
+   \                     delay:
+     33            if(*timer > time){
+   \   000000   2C9D         CMP.W   @R13, R12
+   \   000002   062C         JC      ??delay_0
+     34              *flag = flagVal;
+   \   000004   8E4F0000     MOV.W   R15, 0(R14)
+     35               *timer = 0; 
+   \   000008   8D430000     MOV.W   #0x0, 0(R13)
+     36               start = 0; 
+   \   00000C   8243....     MOV.W   #0x0, &start
+     37            }
+     38          }
+   \                     ??delay_0:
+   \   000010   1001         RETA
+     39          
+
+   \                                 In  segment CODE, align 2
+     40          char * convert(int x) {
+   \                     convert:
+   \   000000   3B15         PUSHM.W #0x4, R11
+   \   000002   0A4C         MOV.W   R12, R10
+     41                  int z = x; 
+   \   000004   0B4A         MOV.W   R10, R11
+     42          	int i = 0; 
+   \   000006   0843         MOV.W   #0x0, R8
+     43          	while (z > 0) {
+   \                     ??convert_0:
+   \   000008   1B93         CMP.W   #0x1, R11
+   \   00000A   1038         JL      ??convert_1
+     44          		binNum[i] = z % 2;
+   \   00000C   2E43         MOV.W   #0x2, R14
+   \   00000E   0C4B         MOV.W   R11, R12
+   \   000010   ........     CALLA   #?DivMod16s
+   \   000014   C84E....     MOV.B   R14, binNum(R8)
+     45                          binNum[i] = binNum[i] + '0'; 
+   \   000018   F8503000.... ADD.B   #0x30, binNum(R8)
+     46          		z = z / 2; 
+   \   00001E   0C4B         MOV.W   R11, R12
+   \   000020   2E43         MOV.W   #0x2, R14
+   \   000022   ........     CALLA   #?DivMod16s
+   \   000026   0B4C         MOV.W   R12, R11
+     47          		
+     48          		i++; 
+   \   000028   1853         ADD.W   #0x1, R8
+   \   00002A   EE3F         JMP     ??convert_0
+     49          	}
+     50                  binNum[i+1] = '\0'; 
+   \                     ??convert_1:
+   \   00002C   C843....     MOV.B   #0x0, binNum + 1(R8)
+     51                  
+     52                  return binNum; 
+   \   000030   3C40....     MOV.W   #binNum, R12
+   \   000034   3817         POPM.W  #0x4, R11
+   \   000036   1001         RETA
+     53          }
+
+   Maximum stack usage in bytes:
+
+   CSTACK Function
+   ------ --------
+     12   convert
+       12 ?DivMod16s
+      4   delay
+      4   toggleLEDs
+        4   -> withinRange
+
+
+   Segment part sizes:
+
+   Bytes  Function/Label
+   -----  --------------
+       2  _A_PAOUT_L
+       2  _A_PCOUT_L
+      32  binNum
+      56  convert
+      18  delay
+     104  toggleLEDs
+
+ 
+ 178 bytes in segment CODE
+   4 bytes in segment DATA16_AN
+  32 bytes in segment DATA16_Z
+ 
+ 178 bytes of CODE memory
+  32 bytes of DATA memory (+ 4 bytes shared)
+
+Errors: none
+Warnings: none
