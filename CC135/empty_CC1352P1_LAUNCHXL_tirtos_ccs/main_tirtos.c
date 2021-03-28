@@ -34,15 +34,7 @@
 /*
  *  ======== main_tirtos.c ========
  */
-#include <stdint.h>
-
-/* POSIX Header files */
-#include <pthread.h>
-
-/* RTOS header files */
-#include <ti/sysbios/BIOS.h>
-
-#include <ti/drivers/Board.h>
+#include "includes.h"
 
 extern void *mainThread(void *arg0);
 

@@ -34,6 +34,8 @@
  *  ======== empty.c ========
  */
 
+#include "functions.h"
+// empty.c
 /* For usleep() */
 #include <unistd.h>
 #include <stdint.h>
@@ -45,42 +47,54 @@
 // #include <ti/drivers/SPI.h>
 // #include <ti/drivers/UART.h>
 // #include <ti/drivers/Watchdog.h>
+#include <ti/drivers/Timer.h>
 
 /* Driver configuration */
 #include "ti_drivers_config.h"
 #include <ti/display/Display.h>
 
+// main_rtos.c
+#include <stdint.h>
 
+/* POSIX Header files */
+#include <pthread.h>
+
+/* RTOS header files */
+#include <ti/sysbios/BIOS.h>
+
+#include <ti/drivers/Board.h>
+#include "functions.h"
+
+unsigned int arr[] = {0,1,1,1,0,1,1,0,0,1,0,1,0,0,0,0,0,0};
 /*
  *  ======== mainThread ========
  */
+
+uint8_t once = 0;
 void *mainThread(void *arg0)
 {
     /* 1 second delay */
     uint32_t time = 1;
-
+   // uint8_t arrSize = 18;
+    //uint8_t i = 0;
+  //  uint32_t count = 0;
     /* Call driver init functions */
     GPIO_init();
+    Timer_init();
+    //timer0_init();
     // I2C_init();
     // SPI_init();
     // UART_init();
     // Watchdog_init();
 
-    /* Configure the LED pin */
-    GPIO_setConfig(CONFIG_GPIO_LED_0, GPIO_CFG_OUT_STD | GPIO_CFG_OUT_LOW);
-    GPIO_setConfig(CONFIG_GPIO_TX, GPIO_CFG_OUT_STD | GPIO_CFG_OUT_LOW);
-    /* Turn on user LED */
-    GPIO_write(CONFIG_GPIO_LED_0, CONFIG_GPIO_LED_ON);
-    GPIO_write(CONFIG_GPIO_TX,1);
-
-    Display_init();
-    Display_Handle hSerial = Display_open(Display_Type_UART,NULL);
-    uint32_t count = 0;
 
     while (1) {
         sleep(time);
-        GPIO_toggle(CONFIG_GPIO_LED_0);
-        GPIO_toggle(CONFIG_GPIO_TX);
-        Display_printf(hSerial, 1, 0, "OUTPUT %d: %d", count++, GPIO_read(CONFIG_GPIO_TX));
+
+        if(!once++){
+        preamble();
+
+        }
+
     }
 }

@@ -13,6 +13,7 @@
 	<ignoreDefaultDeviceSettings value="true"/>
 	<ignoreDefaultCCSSettings value="true"/>
 	<templateProperties value="id=empty_CC1352P1_LAUNCHXL_tirtos_ccs.projectspec.empty_CC1352P1_LAUNCHXL_tirtos_ccs,buildProfile=release,isHybrid=true"/>
-	<origin value="C:\ti\simplelink_cc13x2_26x2_sdk_4_40_04_04\examples\rtos\CC1352P1_LAUNCHXL\drivers\empty\tirtos\ccs\empty_CC1352P1_LAUNCHXL_tirtos_ccs.projectspec"/>
+	<origin value="C:/Users/darri/OneDrive/Desktop/Spring 2021/ECE 484/CC135/empty_CC1352P1_LAUNCHXL_tirtos_ccs"/>
 	<filesToOpen value=""/>
+	<isTargetManual value="false"/>
 </projectOptions>
