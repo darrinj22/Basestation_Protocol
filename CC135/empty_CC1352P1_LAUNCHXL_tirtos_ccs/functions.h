@@ -14,17 +14,14 @@
 
 void tx(unsigned int cmd[], uint8_t size);
 void timer0_init(void);
-
+void transmit(void);
 void timerCallback(Timer_Handle myHandle, int_fast16_t status);
 void upDown(void);
+
 //preamble and frame sync
 void preamble(void);
+void preamble_callback(Timer_Handle Timer0, int_fast16_t status);
 void frameSync(void);
-void tariHigh(Timer_Handle myHandle, int_fast16_t status);
-void pw(Timer_Handle myHandle, int_fast16_t status);
-void pw2(Timer_Handle myHandle, int_fast16_t status);
-void pw3(Timer_Handle myHandle, int_fast16_t status);
-void RTcal(Timer_Handle myHandle, int_fast16_t status);
-void TRcal(Timer_Handle myHandle, int_fast16_t status);
+void frameSync_callback(Timer_Handle Timer0, int_fast16_t status);
 
 #endif /* FUNCTIONS_H_ */

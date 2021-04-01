@@ -33,11 +33,13 @@ GPIO1.$name             = "GPIO_LED_RED";
 GPIO1.pull              = "Pull Down";
 GPIO1.pinInstance.$name = "CONFIG_PIN_0";
 
-GPIO2.mode              = "Output";
-GPIO2.pull              = "Pull Down";
-GPIO2.$name             = "GPIO_TX";
-GPIO2.gpioPin.$assign   = "boosterpack.6";
-GPIO2.pinInstance.$name = "CONFIG_PIN_3";
+GPIO2.mode               = "Output";
+GPIO2.$name              = "GPIO_TX";
+GPIO2.initialOutputState = "High";
+GPIO2.pull               = "Pull Up";
+GPIO2.gpioPin.$assign    = "boosterpack.6";
+GPIO2.pinInstance.$name  = "CONFIG_PIN_3";
+GPIO2.pinInstance.invert = true;
 
 GPIO3.pull              = "Pull Down";
 GPIO3.interruptTrigger  = "Rising Edge";

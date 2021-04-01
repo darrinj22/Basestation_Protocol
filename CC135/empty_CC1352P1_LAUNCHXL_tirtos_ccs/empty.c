@@ -64,37 +64,30 @@
 
 #include <ti/drivers/Board.h>
 #include "functions.h"
+#include "macros.h"
 
-unsigned int arr[] = {0,1,1,1,0,1,1,0,0,1,0,1,0,0,0,0,0,0};
+
 /*
  *  ======== mainThread ========
  */
 
-uint8_t once = 0;
 void *mainThread(void *arg0)
 {
     /* 1 second delay */
-    uint32_t time = 1;
-   // uint8_t arrSize = 18;
-    //uint8_t i = 0;
-  //  uint32_t count = 0;
+    uint32_t time = 100000;
     /* Call driver init functions */
     GPIO_init();
     Timer_init();
-    //timer0_init();
     // I2C_init();
     // SPI_init();
     // UART_init();
     // Watchdog_init();
 
-
     while (1) {
-        sleep(time);
-
-        if(!once++){
+        usleep(time);
         preamble();
-
-        }
+        usleep(time);
+        frameSync();
 
     }
 }
