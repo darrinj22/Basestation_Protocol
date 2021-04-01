@@ -18,6 +18,7 @@ const GPIO4    = GPIO.addInstance();
 const RTOS     = scripting.addModule("/ti/drivers/RTOS");
 const Timer    = scripting.addModule("/ti/drivers/Timer", {}, false);
 const Timer1   = Timer.addInstance();
+const Timer2   = Timer.addInstance();
 
 /**
  * Write custom configuration values to the imported modules.
@@ -58,6 +59,9 @@ CCFG.ccfgTemplate.$name = "ti_devices_CCFGTemplate0";
 Timer1.$name               = "TIMER_0";
 Timer1.timerInstance.$name = "CONFIG_GPTIMER_0";
 
+Timer2.$name               = "TIMER_1";
+Timer2.timerInstance.$name = "CONFIG_GPTIMER_1";
+
 /**
  * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
  * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
@@ -69,3 +73,4 @@ Display1.uart.uart.rxPin.$suggestSolution   = "boosterpack.3";
 GPIO1.gpioPin.$suggestSolution              = "boosterpack.39";
 GPIO4.gpioPin.$suggestSolution              = "boosterpack.40";
 Timer1.timerInstance.timer.$suggestSolution = "GPTM0";
+Timer2.timerInstance.timer.$suggestSolution = "GPTM0";

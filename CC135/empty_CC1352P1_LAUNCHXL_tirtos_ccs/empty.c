@@ -74,7 +74,7 @@
 void *mainThread(void *arg0)
 {
     /* 1 second delay */
-    uint32_t time = 100000;
+    uint32_t time = 10;
     /* Call driver init functions */
     GPIO_init();
     Timer_init();
